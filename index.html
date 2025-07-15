@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>番号で画像表示テスト</title>
+</head>
+<body>
+  <h1>番号を入力して画像を表示</h1>
+  <form onsubmit="showImage(); return false;">
+    <input type="text" id="code" placeholder="番号を入力" />
+    <button type="submit">表示</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    function showImage() {
+      const code = document.getElementById('code').value;
+      const result = document.getElementById('result');
+      const imageMap = {
+        "001": "images/001.jpg",
+        "002": "images/002.jpg"
+      };
+
+      if (imageMap[code]) {
+        result.innerHTML = `<img src="${imageMap[code]}" alt="イラスト" style="max-width:100%;">`;
+      } else {
+        result.innerHTML = "<p>該当する画像がありません。</p>";
+      }
+    }
+  </script>
+</body>
+</html>
 
