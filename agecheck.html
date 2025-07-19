@@ -2,43 +2,49 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>年齢確認</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>年齢確認</h1>
-  <form id="ageForm" onsubmit="return checkAge();">
-    <label for="age">あなたの年齢を入力してください：</label><br>
-    <input type="number" id="age" min="0" required><br><br>
+  <header>
+    <h1>年齢確認</h1>
+  </header>
 
-    <label>
-      <input type="checkbox" id="agree"> 私は18歳以上であり、成人向けコンテンツに同意します。
-    </label><br><br>
+  <main>
+    <p>このサイトには18歳以上を対象としたコンテンツが含まれます。</p>
+    <p>あなたは18歳以上ですか？</p>
 
-    <button type="submit">入場する</button>
-  </form>
+    <form onsubmit="return checkAge();">
+      <label>
+        年齢を入力してください（数字のみ）：
+        <input type="number" id="age" min="0" placeholder="例：18">
+      </label>
+      <br><br>
+      <button type="submit">18歳以上で、内容に同意します</button>
+    </form>
 
-  <p id="message" style="color: red;"></p>
+    <p id="error" style="color:red; margin-top:10px;"></p>
+  </main>
 
   <script>
     function checkAge() {
       const age = parseInt(document.getElementById("age").value);
-      const agree = document.getElementById("agree").checked;
-      const message = document.getElementById("message");
+      const error = document.getElementById("error");
 
-      if (isNaN(age) || age < 18) {
-        message.textContent = "18歳未満の方はご利用いただけません。";
+      if (isNaN(age)) {
+        error.textContent = "年齢を入力してください。";
         return false;
       }
 
-      if (!agree) {
-        message.textContent = "同意が必要です。";
+      if (age >= 18) {
+        // viewer.html へ遷移
+        window.location.href = "viewer.html";
+        return false;
+      } else {
+        error.textContent = "18歳未満の方はご利用いただけません。";
         return false;
       }
-
-      // 通過したら image.html にリダイレクト
-      window.location.href = "image.html";
-      return false;
     }
   </script>
 </body>
