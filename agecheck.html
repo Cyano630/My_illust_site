@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>年齢確認</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>年齢確認</h1>
+  <form id="ageForm" onsubmit="return checkAge();">
+    <label for="age">あなたの年齢を入力してください：</label><br>
+    <input type="number" id="age" min="0" required><br><br>
+
+    <label>
+      <input type="checkbox" id="agree"> 私は18歳以上であり、成人向けコンテンツに同意します。
+    </label><br><br>
+
+    <button type="submit">入場する</button>
+  </form>
+
+  <p id="message" style="color: red;"></p>
+
+  <script>
+    function checkAge() {
+      const age = parseInt(document.getElementById("age").value);
+      const agree = document.getElementById("agree").checked;
+      const message = document.getElementById("message");
+
+      if (isNaN(age) || age < 18) {
+        message.textContent = "18歳未満の方はご利用いただけません。";
+        return false;
+      }
+
+      if (!agree) {
+        message.textContent = "同意が必要です。";
+        return false;
+      }
+
+      // 通過したら image.html にリダイレクト
+      window.location.href = "image.html";
+      return false;
+    }
+  </script>
+</body>
+</html>
