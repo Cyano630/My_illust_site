@@ -2,32 +2,37 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>番号で画像表示テスト</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>私のイラストサイト</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>番号を入力して画像を表示</h1>
-  <form onsubmit="showImage(); return false;">
-    <input type="text" id="code" placeholder="番号を入力" />
-    <button type="submit">表示</button>
-  </form>
-  <div id="result"></div>
+  <header>
+    <h1>私のイラストサイト</h1>
+    <nav>
+      <a href="index.html">トップ</a> |
+      <a href="disclaimer.html">免責事項</a>
+    </nav>
+  </header>
 
-  <script>
-    function showImage() {
-      const code = document.getElementById('code').value;
-      const result = document.getElementById('result');
-      const imageMap = {
-        "001": "images/001.jpg",
-        "002": "images/002.jpg"
-      };
+  <main>
+    <img src="画像/sample.jpg" alt="トップ画像" style="max-width: 100%;">
+    <section>
+      <h2>このサイトについて</h2>
+      <p>番号を入力するとイラストが表示される閲覧専用サイトです。</p>
+    </section>
+    <section>
+      <h2>使い方</h2>
+      <p>トップページのフォームに表示されている番号を入力してください。</p>
+    </section>
+    <section>
+      <h2>注意事項</h2>
+      <p>このサイトは成人向けコンテンツを含みます。18歳未満の方の閲覧は禁止されています。</p>
+    </section>
+  </main>
 
-      if (imageMap[code]) {
-        result.innerHTML = `<img src="${imageMap[code]}" alt="イラスト" style="max-width:100%;">`;
-      } else {
-        result.innerHTML = "<p>該当する画像がありません。</p>";
-      }
-    }
-  </script>
+  <footer>
+    <p>&copy; 2025 私のイラストサイト</p>
+  </footer>
 </body>
 </html>
-
