@@ -2,49 +2,97 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>年齢確認</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>年齢確認 / Age Verification</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: #f9f9f9;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .age-container {
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .age-container h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .age-container p.icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .age-container input[type="number"],
+    .age-container input[type="checkbox"] {
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    .age-container button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #message {
+      color: red;
+      margin-top: 15px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>年齢確認</h1>
-  </header>
+  <div class="age-container">
+    <p class="icon">🔞</p>
+    <h1>年齢確認 / Age Verification</h1>
+    <form id="ageForm" onsubmit="return checkAge();">
+      <label for="age">あなたの年齢を入力してください：<br><small>(Enter your age)</small></label><br>
+      <input type="number" id="age" min="0" required><br><br>
 
-  <main>
-    <p>このサイトには18歳以上を対象としたコンテンツが含まれます。</p>
-    <p>あなたは18歳以上ですか？</p>
-
-    <form onsubmit="return checkAge();">
       <label>
-        年齢を入力してください（数字のみ）：
-        <input type="number" id="age" min="0" placeholder="例：18">
-      </label>
-      <br><br>
-      <button type="submit">18歳以上で、内容に同意します</button>
+        <input type="checkbox" id="agree">
+        私は18歳以上であり、成人向けコンテンツに同意します。<br>
+        <small>(I am 18+ and agree to view adult content)</small>
+      </label><br><br>
+
+      <button type="submit">入場する / Enter</button>
     </form>
 
-    <p id="error" style="color:red; margin-top:10px;"></p>
-  </main>
+    <p id="message"></p>
+  </div>
 
   <script>
     function checkAge() {
       const age = parseInt(document.getElementById("age").value);
-      const error = document.getElementById("error");
+      const agree = document.getElementById("agree").checked;
+      const message = document.getElementById("message");
 
-      if (isNaN(age)) {
-        error.textContent = "年齢を入力してください。";
+      if (isNaN(age) || age < 18) {
+        message.textContent = "18歳未満の方はご利用いただけません。 / You must be at least 18 years old.";
         return false;
       }
 
-      if (age >= 18) {
-        // viewer.html へ遷移
-        window.location.href = "viewer.html";
-        return false;
-      } else {
-        error.textContent = "18歳未満の方はご利用いただけません。";
+      if (!agree) {
+        message.textContent = "同意が必要です。 / You must agree to proceed.";
         return false;
       }
+
+      // 認証成功後に image.html に移動
+      window.location.href = "image.html";
+      return false;
     }
   </script>
 </body>
