@@ -2,47 +2,113 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>番号で画像表示 / View Images by Code</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>私のイラストサイト / My Illustration Site</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, footer {
+      background: #f2f2f2;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .age-warning {
+      background-color: #ffe0e0;
+      border: 2px solid #ff6666;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin: 2rem auto;
+      max-width: 500px;
+      font-size: 1.2rem;
+    }
+
+    .age-warning a {
+      text-decoration: none;
+      color: #b30000;
+      font-weight: bold;
+      display: inline-block;
+      font-size: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .age-warning-icon {
+      font-size: 3rem;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 1rem 0;
+    }
+
+    section {
+      margin-top: 2rem;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.3rem;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>番号入力で画像表示 / Enter Code to View Image</h1>
+    <h1>私のイラストサイト<br><span style="font-size: 1rem;">My Illustration Site</span></h1>
+    <nav>
+      <a href="index.html">トップ / Home</a> |
+      <a href="disclaimer.html">免責事項 / Disclaimer</a>
+    </nav>
   </header>
 
   <main>
-    <p>
-      <a href="disclaimer.html">⚠️ 免責事項 / Disclaimer を必ずご確認ください / Please read the disclaimer</a>
-    </p>
+    <div class="age-warning">
+      <div class="age-warning-icon">🔞</div>
+      <div>18歳以上の方のみご入場いただけます。<br>Adults only (18+). Please confirm your age.</div>
+      <a href="agecheck.html">入場する / Enter</a>
+    </div>
 
-    <p>
-      表示したい画像の番号を入力してください。<br>
-      Enter the code number of the image you want to view.
-    </p>
+    <img src="画像/sample.jpg" alt="トップ画像 / Top Illustration">
 
-    <form onsubmit="showImage(); return false;">
-      <input type="text" id="code" placeholder="例: 001 / e.g., 001">
-      <button type="submit">表示 / View</button>
-    </form>
+    <section>
+      <h2>このサイトについて / About This Site</h2>
+      <p>番号を入力するとイラストが表示される閲覧専用サイトです。<br>This is a viewer site where you can display illustrations by entering a number.</p>
+    </section>
 
-    <div id="result" style="margin-top: 20px;"></div>
+    <section>
+      <h2>使い方 / How to Use</h2>
+      <p>トップページのフォームに表示されている番号を入力してください。<br>Enter the number shown in the video into the form on the top page.</p>
+    </section>
+
+    <section>
+      <h2>注意事項 / Notice</h2>
+      <p>このサイトは成人向けコンテンツを含みます。18歳未満の方の閲覧は禁止されています。<br>This site contains adult content. Viewing by anyone under 18 years of age is strictly prohibited.</p>
+    </section>
   </main>
 
-  <script>
-    function showImage() {
-      const code = document.getElementById('code').value;
-      const result = document.getElementById('result');
-      const imageMap = {
-        "001": "images/001.jpg",
-        "002": "images/002.jpg"
-      };
-
-      if (imageMap[code]) {
-        result.innerHTML = `<img src="${imageMap[code]}" alt="イラスト" style="max-width:100%;">`;
-      } else {
-        result.innerHTML = "<p>該当する画像がありません。 / No matching image found.</p>";
-      }
-    }
-  </script>
+  <footer>
+    <p>&copy; 2025 私のイラストサイト / My Illustration Site</p>
+  </footer>
 </body>
 </html>
