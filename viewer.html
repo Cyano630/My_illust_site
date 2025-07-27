@@ -3,45 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>画像番号入力ページ</title>
+  <title>画像表示 / Image Viewer</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    main {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    input, button {
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    #result img {
+      max-width: 100%;
+      margin-top: 1rem;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>画像番号入力ページ</h1>
+    <h1>画像表示 / Image Viewer</h1>
+    <nav>
+      <a href="index.html">トップ / Home</a> |
+      <a href="disclaimer.html">免責事項 / Disclaimer</a>
+    </nav>
   </header>
 
   <main>
-    <p>
-      <a href="disclaimer.html">⚠️ 免責事項 / Disclaimer を必ずご確認ください</a>
-    </p>
+    <p>表示したい画像の番号を入力してください。<br>
+    <small>Enter the code number of the image you want to view.</small></p>
 
-    <p>表示したい画像の番号を入力してください。</p>
     <form onsubmit="showImage(); return false;">
-      <input type="text" id="code" placeholder="例: 001">
-      <button type="submit">表示</button>
+      <input type="text" id="code" placeholder="例: 001 / ex: 001">
+      <button type="submit">表示 / Show</button>
     </form>
 
-    <div id="result" style="margin-top: 20px;"></div>
+    <div id="result"></div>
   </main>
+
+  <footer>
+    <p>&copy; 2025 私のイラストサイト</p>
+  </footer>
 
   <script>
     function showImage() {
-      const code = document.getElementById('code').value.trim();
-      const result = document.getElementById('result');
+      const code = document.getElementById("code").value.trim();
+      const resultDiv = document.getElementById("result");
 
-      // 画像のマッピング（ここに番号と画像のパスを記述）
-      const imageMap = {
-        "001": "images/001.jpg",
-        "002": "images/002.jpg"
-      };
-
-      if (imageMap[code]) {
-        result.innerHTML = `<img src="${imageMap[code]}" alt="イラスト" style="max-width: 100%;">`;
-      } else {
-        result.innerHTML = `<p>該当する画像が見つかりませんでした。</p>`;
+      if (code === "") {
+        resultDiv.innerHTML = "<p>番号を入力してください。<br><small>Please enter a code number.</small></p>";
+        return;
       }
+
+      const imagePath = `画像/${code}.jpg`;
+      resultDiv.innerHTML = `<img src="${imagePath}" alt="Image ${code}">`;
     }
   </script>
 </body>
 </html>
+
